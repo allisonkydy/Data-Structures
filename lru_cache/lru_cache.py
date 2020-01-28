@@ -22,7 +22,9 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        # retrieve value from cache using key
+        # move element to front of cache (most recently used)
+        # return value if exists, if not return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -35,4 +37,21 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        # check if key already exists using lookup
+        # if not, create a new item and add it to cache and lookup
+        if not key in self.lookup:
+            # add item to cache and lookup
+            self.cache.add_to_head((key, value))
+            self.lookup.update({key: self.cache.head})
+            # if cache is at max capacity
+            if self.cache.length == limit:
+                # remove oldest entry from cache (tail) and lookup
+                oldest = self.cache.remove_from_tail()
+                self.lookup.pop(oldest[0])
+        # if it does
+        else:
+            # rewrite old value with new value
+            item = self.lookup.get(key)
+            item.value = (key, value)
+            # move item to head of list (most recently used)
+            self.cache.move_to_front(item)
