@@ -23,8 +23,15 @@ class LRUCache:
     """
     def get(self, key):
         # retrieve value from cache using key
-        # move element to front of cache (most recently used)
+        item = self.lookup.get(key)
+
         # return value if exists, if not return None
+        if item.value is not None:
+            # move element to front of cache (most recently used)
+            self.cache.move_to_front(item)
+            return item.value
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
