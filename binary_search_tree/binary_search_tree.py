@@ -63,7 +63,14 @@ class BinarySearchTree:
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        def traverse_tree(node, cb):
+            if node is None:
+                return
+            else:
+                cb(node.value)
+                traverse_tree(node.left, cb)
+                traverse_tree(node.right, cb)
+        traverse_tree(self, cb)
 
     # DAY 2 Project -----------------------
 
@@ -92,14 +99,3 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
-
-
-# bst = BinarySearchTree(1)
-
-# bst.insert(2)
-# bst.insert(3)
-# # bst.insert(4)
-
-# while bst is not None:
-#     print(bst.value)
-#     bst = bst.right
