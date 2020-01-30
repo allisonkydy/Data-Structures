@@ -34,23 +34,37 @@ class BinarySearchTree:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        node = self
-        while True:
-            # if values match, return true
-            if target == node.value:
+        # recursive solution
+        def search_tree(node, target):
+            if node is None:
+                return False
+            elif target == node.value:
                 return True
-            # if target is less, move left
             elif target < node.value:
-                # if no left child, tree does not contain target
-                if node.left is None:
-                    return False
-                node = node.left
-            # if target is greater or equal, move right
+                return search_tree(node.left, target)
             else:
-                # if no right child, tree does not contain target
-                if node.right is None:
-                    return False
-                node = node.right
+                return search_tree(node.right, target)
+
+        return search_tree(self, target)
+
+        # iterative solution
+        # node = self
+        # while True:
+        #     # if values match, return true
+        #     if target == node.value:
+        #         return True
+        #     # if target is less, move left
+        #     elif target < node.value:
+        #         # if no left child, tree does not contain target
+        #         if node.left is None:
+        #             return False
+        #         node = node.left
+        #     # if target is greater or equal, move right
+        #     else:
+        #         # if no right child, tree does not contain target
+        #         if node.right is None:
+        #             return False
+        #         node = node.right
 
     # Return the maximum value found in the tree
     def get_max(self):
