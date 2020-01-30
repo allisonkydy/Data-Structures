@@ -176,13 +176,22 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        # use a stack and a temp var
+        # make a stack and a temp var
+        stk = Stack()
+        tmp = node
+        stk.push(tmp)
         # while the stack is not empty
-            # save root in temp var, then pop off stack
-            # do the thing (call cb)
+        while stk.len() > 0:
+            # save root in temp var, pop off stack
+            tmp = stk.pop()
+            # print value
+            print(tmp.value)
             # check left and right
-                # if left/right add to stack
-        pass
+            # if item exists, add to stack
+            if tmp.left:
+                stk.push(tmp.left)
+            if tmp.right:
+                stk.push(tmp.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
