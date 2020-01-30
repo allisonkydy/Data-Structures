@@ -81,6 +81,20 @@ class BinarySearchTree:
         #             return False
         #         node = node.right
 
+        # recursive lecture solution
+        # if self.value == target:
+        #     return True
+        # if target < self.value:
+        #     if not self.left:
+        #         return False
+        #     else:
+        #         return self.left.contains(target)
+        # else:
+        #     if not self.right:
+        #         return False
+        #     else:
+        #         return self.right.contains(target)
+
     # Return the maximum value found in the tree
     def get_max(self):
         # move right until reach the rightmost (max) node
