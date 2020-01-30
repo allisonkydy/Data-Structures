@@ -12,6 +12,7 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
+        # iterative solution
         node = self
         new_node = BinarySearchTree(value)
         while True:
@@ -29,23 +30,37 @@ class BinarySearchTree:
                     node.right = new_node
                     break
                 node = node.right
+
+        # recursive solution from lecture
+        # compare root node
+        # if value < self.value:
+        #     if not self.left:
+        #         # if node does not exist, insert new node
+        #         self.left = BinarySearchTree(value)
+        #     else:
+        #         # if node exists, recurse
+        #         self.left.insert(value)
+        # else: # value is >= node
+        #     if not self.right:
+        #         self.right = BinarySearchTree(value)
+        #     else:
+        #         self.right.insert(value)
          
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
         # recursive solution
-        def search_tree(node, target):
-            if node is None:
+        if target == self.value:
+            return True
+        elif target < self.value:
+            if self.left is None:
                 return False
-            elif target == node.value:
-                return True
-            elif target < node.value:
-                return search_tree(node.left, target)
-            else:
-                return search_tree(node.right, target)
-
-        return search_tree(self, target)
+            return self.left.contains(target)
+        else:
+            if self.right is None:
+                return False
+            return self.right.contains(target)
 
         # iterative solution
         # node = self
@@ -68,29 +83,66 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        node = self
         # move right until reach the rightmost (max) node
-        while node.right is not None:
-            node = node.right
-        return node.value
+        while self.right is not None:
+            self = self.right
+        return self.value
+
+        # recursive solution from lecture
+        # if not self.right:
+        #     return self.value
+        # else:
+        #     return self.right.get_max()
+
+        # return recursive call when you want to find an answer
+        # if it's a process or search, no need to return
+
+        # iterative solution from lecture
+        # max_value = self.value
+        # # create a reference to the current node and update it 
+        # # as we traverse the tree
+        # current = self
+        # while current:
+        #     if current.value > max_value:
+        #         max_value = current.value
+        #     current = current.right
+        # return max_value
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        def traverse_tree(node, cb):
-            if node is None:
-                return
-            else:
-                cb(node.value)
-                traverse_tree(node.left, cb)
-                traverse_tree(node.right, cb)
-        traverse_tree(self, cb)
+        # second pass recursive solution
+        cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
+
+        # first pass recursive solution
+        # def traverse_tree(node, cb):
+        #     if node is None:
+        #         return
+        #     else:
+        #         cb(node.value)
+        #         traverse_tree(node.left, cb)
+        #         traverse_tree(node.right, cb)
+        # traverse_tree(self, cb)
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
+        # go as far left as possible
+        # print left node
+        # print root node
+        # if right node has children
+            # go as far left as possible
+            # print left node
+            # print root node
+            # etc....
+        # if right node doesn't have children 
+            # move back to the parent of the root node
         pass
 
     # Print the value of every node, starting with the given node,
