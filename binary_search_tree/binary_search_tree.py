@@ -157,16 +157,30 @@ class BinarySearchTree:
             # etc....
         # if right node doesn't have children 
             # move back to the parent of the root node
+        # same idea as for_each recursive solution
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
+        # make a queue and temp var
+        # while the queue is not empty
+            # save root in temp var, dequeue off queue -- doesn't matter when you dequeue, unlike stack
+            # do the thing
+            # check left and right
+                # if left/right, add to queue
+
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
+        # use a stack and a temp var
+        # while the stack is not empty
+            # save root in temp var, then pop off stack
+            # do the thing (call cb)
+            # check left and right
+                # if left/right add to stack
         pass
 
     # STRETCH Goals -------------------------
