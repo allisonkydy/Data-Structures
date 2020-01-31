@@ -49,6 +49,11 @@ class Heap:
         # if there are no children, end sift
         if left >= self.get_size() and right >= self.get_size():
             return
+
+        # if there's only a left child and it's less than or 
+        # equal to the value at the given index, end sift 
+        if right >= self.get_size() and self.storage[left] <= self.storage[index]:
+            return  
         
         # if there is only a left child and it's larger than the 
         # value at the given index, swap and end sift
@@ -56,12 +61,9 @@ class Heap:
             self.storage[left], self.storage[index] = self.storage[index], self.storage[left]
             return        
         
-        max_child = None
         # find the index of the largest child
-        if self.storage[left] >= self.storage[right]:
-            max_child = left
-        else:
-            max_child = right
+        max_child = left if self.storage[left] >= self.storage[right] else right
+
         # if the value of the largest child is greater than the value
         # at the given index, swap and continue sifting
         if self.storage[max_child] > self.storage[index]:
