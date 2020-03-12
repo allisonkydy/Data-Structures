@@ -3,19 +3,70 @@ class Heap:
         self.storage = []
 
     def insert(self, value):
-        pass
+        # insert value at the end of the list
+        self.storage.append(value)
+        # bubble up the last value of list
+        self._bubble_up(self.get_size() - 1)
 
     def delete(self):
-        pass
+        # put first element in temp var
+        first = self.storage[0]
+        # change value of first element to value of last element
+        self.storage[0] = self.storage[-1]
+        # pop last element from storage
+        self.storage.pop()
+        # sift down first element
+        self._sift_down(0)
+        
+        return first
 
     def get_max(self):
-        pass
+        if len(self.storage) > 0:
+            return self.storage[0]
+        else:
+            return None
 
     def get_size(self):
-        pass
+        return len(self.storage)
 
     def _bubble_up(self, index):
-        pass
+        # find index of parent
+        parent = (index - 1) // 2
+        # if parent index is -1 or parent value is greater than or equal to value at index, stop bubbling
+        if parent < 0 or self.storage[parent] >= self.storage[index]:
+            return
+        # if parent value is less than value at index
+        else:
+            # swap parent value with value at index
+            self.storage[parent], self.storage[index] = self.storage[index], self.storage[parent]
+            # recurse with parent index
+            self._bubble_up(parent)
 
     def _sift_down(self, index):
-        pass
+        left = 2 * index + 1
+        right = 2 * index + 2
+
+        # if there are no children, end sift
+        if left >= self.get_size() and right >= self.get_size():
+            return
+
+        # if there's only a left child and it's less than or 
+        # equal to the value at the given index, end sift 
+        if right >= self.get_size() and self.storage[left] <= self.storage[index]:
+            return  
+        
+        # if there is only a left child and it's larger than the 
+        # value at the given index, swap and end sift
+        if right >= self.get_size() and self.storage[left] > self.storage[index]:
+            self.storage[left], self.storage[index] = self.storage[index], self.storage[left]
+            return        
+        
+        # find the index of the largest child
+        max_child = left if self.storage[left] >= self.storage[right] else right
+
+        # if the value of the largest child is greater than the value
+        # at the given index, swap and continue sifting
+        if self.storage[max_child] > self.storage[index]:
+            self.storage[max_child], self.storage[index] = self.storage[index], self.storage[max_child]
+            self._sift_down(max_child)
+
